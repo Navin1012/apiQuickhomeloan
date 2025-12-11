@@ -31,10 +31,8 @@ class AuthenticatedSessionController extends Controller
                 ], 401);
             }
 
-            // login user into sanctum auth guard (no session)
             Auth::login($user);
 
-            // remove old tokens
             PersonalAccessToken::where('user_id', (string)$user->_id)->delete();
 
             $token = Str::random(60);
